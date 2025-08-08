@@ -1,0 +1,31 @@
+services:
+  - type: web
+    name: solidapp
+    env: node
+    plan: free
+    buildCommand: |
+      npm install
+      npm run migrate
+      npm run seed
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: ADMIN_SLUG
+        sync: false
+      - key: ADMIN_PASSWORD
+        sync: false
+      - key: SITE_NAME
+        value: Solidapp
+      - key: SITE_TAGLINE
+        value: Mutual aid, offers, and questions — no login.
+      - key: POW_DIFFICULTY
+        value: "18"
+      - key: POST_COOLDOWN_SECONDS
+        value: "60"
+      - key: COMMENT_COOLDOWN_SECONDS
+        value: "30"
+      - key: MAX_LINKS_PER_POST
+        value: "3"
+      - key: MAX_LINKS_PER_COMMENT
+        value: "2"
