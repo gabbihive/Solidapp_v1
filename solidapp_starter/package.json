@@ -26,6 +26,6 @@
     "dev": "node --env-file=.env src/server.js",
     "migrate": "node src/scripts/migrate.js",
     "seed": "node src/scripts/seed.js",
-    "start": "node src/server.js" // <-- added for Render
+    "start": "node src/server.js"
   }
 }
