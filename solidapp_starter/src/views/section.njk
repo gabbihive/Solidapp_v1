@@ -1,0 +1,22 @@
+{% extends "layout.njk" %}
+{% block content %}
+<h2>/s/{{ section.slug }} — {{ section.name }}</h2>
+<p>{{ section.description }}</p>
+<ul class="list">
+{% for p in posts %}
+  <li class="item">
+    <div class="votes">
+      <button class="vote" data-type="post" data-id="{{ p.id }}" data-dir="1">▲</button>
+      <div class="score">{{ p.score }}</div>
+      <button class="vote" data-type="post" data-id="{{ p.id }}" data-dir="-1">▼</button>
+    </div>
+    <div class="content">
+      <a class="title" href="/p/{{ p.id }}">{{ p.title }}</a>
+      <div class="meta">{{ p.kind }}</div>
+    </div>
+  </li>
+{% else %}
+  <li>No posts in this section yet.</li>
+{% endfor %}
+</ul>
+{% endblock %}

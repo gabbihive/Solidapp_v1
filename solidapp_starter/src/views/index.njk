@@ -1,0 +1,32 @@
+{% extends "layout.njk" %}
+{% block content %}
+<form class="search" method="get" action="/">
+  <input type="text" name="q" value="{{ q }}" placeholder="search...">
+  <select name="section">
+    <option value="">all sections</option>
+    {% for s in sections %}
+      <option value="{{ s.slug }}" {{ 'selected' if s.slug == section else '' }}>{{ s.name }}</option>
+    {% endfor %}
+  </select>
+  <button type="submit">Search</button>
+</form>
+
+<ul class="list">
+{% for p in posts %}
+  <li class="item">
+    <div class="votes">
+      <button class="vote" data-type="post" data-id="{{ p.id }}" data-dir="1">▲</button>
+      <div class="score">{{ p.score }}</div>
+      <button class="vote" data-type="post" data-id="{{ p.id }}" data-dir="-1">▼</button>
+    </div>
+    <div class="content">
+      <a class="title" href="/p/{{ p.id }}">{{ p.title }}</a>
+      <div class="meta">in <a href="/s/{{ p.section_slug }}">{{ p.section_name }}</a> • {{ p.kind }}</div>
+      <div class="excerpt">{{ p.body_md | truncate(180) }}</div>
+    </div>
+  </li>
+{% else %}
+  <li>No posts yet.</li>
+{% endfor %}
+</ul>
+{% endblock %}

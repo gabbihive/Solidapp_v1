@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ SITE_NAME }} — {{ SITE_TAGLINE }}</title>
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'self';">
+  <link rel="stylesheet" href="/public/css/styles.css">
+</head>
+<body>
+  <header class="bar">
+    <a class="brand" href="/">{{ SITE_NAME }}</a>
+    <nav>
+      <a href="/?sort=hot">hot</a>
+      <a href="/?sort=new">new</a>
+      <a href="/?sort=top">top</a>
+      <a href="/compose">post</a>
+      <a href="/{{ ADMIN_SLUG }}">admin</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="footer">
+    <div class="meta">© {{ SITE_NAME }}</div>
+  </footer>
+
+  <script src="/public/js/app.js"></script>
+</body>
+</html>

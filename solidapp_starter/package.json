@@ -1,0 +1,23 @@
+{
+  "name": "solidapp",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node --env-file=.env src/server.js",
+    "start": "NODE_ENV=production node --env-file=.env src/server.js",
+    "migrate": "node src/scripts/migrate.js",
+    "seed": "node src/scripts/seed.js"
+  },
+  "dependencies": {
+    "@fastify/basic-auth": "^5.1.1",
+    "@fastify/formbody": "^7.4.0",
+    "@fastify/static": "^7.0.4",
+    "@fastify/view": "^8.2.0",
+    "better-sqlite3": "^9.4.3",
+    "fastify": "^4.29.1",
+    "marked": "^12.0.2",
+    "nunjucks": "^3.2.4",
+    "sanitize-html": "^2.13.0"
+  }
+}

@@ -1,0 +1,88 @@
+{% extends "layout.njk" %}
+{% block content %}
+<h2>Admin</h2>
+
+<section>
+  <h3>Sections</h3>
+  <form method="post" action="/{{ ADMIN_SLUG }}/sections">
+    <input name="slug" placeholder="slug" required>
+    <input name="name" placeholder="name" required>
+    <input name="description" placeholder="description">
+    <label><input type="checkbox" name="is_active" value="1" checked> active</label>
+    <button type="submit">Save</button>
+  </form>
+  <ul>
+    {% for s in sections %}
+      <li>{{ s.slug }} — {{ s.name }} ({% if s.is_active %}active{% else %}disabled{% endif %})</li>
+    {% endfor %}
+  </ul>
+</section>
+
+<section>
+  <h3>Recent posts</h3>
+  <table class="table">
+    <tr><th>ID</th><th>Section</th><th>Title</th><th>Status</th><th>Actions</th></tr>
+    {% for p in posts %}
+      <tr>
+        <td>{{ p.id }}</td>
+        <td>{{ p.section_slug }}</td>
+        <td>{{ p.title }}</td>
+        <td>{{ p.status }}</td>
+        <td>
+          <form method="post" action="/{{ ADMIN_SLUG }}/post/{{ p.id }}/hide" class="inline"><button>hide</button></form>
+          <form method="post" action="/{{ ADMIN_SLUG }}/post/{{ p.id }}/show" class="inline"><button>show</button></form>
+          <form method="post" action="/{{ ADMIN_SLUG }}/post/{{ p.id }}/freeze" class="inline"><button>freeze</button></form>
+          <form method="post" action="/{{ ADMIN_SLUG }}/post/{{ p.id }}/delete" class="inline"><button>delete</button></form>
+        </td>
+      </tr>
+    {% endfor %}
+  </table>
+</section>
+
+<section>
+  <h3>Recent comments</h3>
+  <table class="table">
+    <tr><th>ID</th><th>Post</th><th>Score</th><th>Status</th><th>Actions</th></tr>
+    {% for c in comments %}
+      <tr>
+        <td>{{ c.id }}</td>
+        <td>{{ c.post_id }}</td>
+        <td>{{ c.score }}</td>
+        <td>{{ c.status }}</td>
+        <td>
+          <form method="post" action="/{{ ADMIN_SLUG }}/comment/{{ c.id }}/hide" class="inline"><button>hide</button></form>
+          <form method="post" action="/{{ ADMIN_SLUG }}/comment/{{ c.id }}/show" class="inline"><button>show</button></form>
+          <form method="post" action="/{{ ADMIN_SLUG }}/comment/{{ c.id }}/freeze" class="inline"><button>freeze</button></form>
+          <form method="post" action="/{{ ADMIN_SLUG }}/comment/{{ c.id }}/delete" class="inline"><button>delete</button></form>
+        </td>
+      </tr>
+    {% endfor %}
+  </table>
+</section>
+
+<section>
+  <h3>Reports</h3>
+  <ul>
+    {% for r in reports %}
+      <li>{{ r.entity_type }} #{{ r.entity_id }} — {{ r.reason }}</li>
+    {% endfor %}
+  </ul>
+</section>
+
+<section>
+  <h3>Bug reports</h3>
+  <ul>
+    {% for b in bugs %}
+      <li><strong>{{ b.title }}</strong> — {{ b.description | truncate(200) }}</li>
+    {% endfor %}
+  </ul>
+</section>
+
+<p>Exports: 
+<a href="/{{ ADMIN_SLUG }}/export/posts">posts.json</a> • 
+<a href="/{{ ADMIN_SLUG }}/export/comments">comments.json</a> • 
+<a href="/{{ ADMIN_SLUG }}/export/reports">reports.json</a> • 
+<a href="/{{ ADMIN_SLUG }}/export/bugs">bugs.json</a> • 
+<a href="/{{ ADMIN_SLUG }}/export/sections">sections.json</a></p>
+
+{% endblock %}

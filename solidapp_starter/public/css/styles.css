@@ -1,0 +1,114 @@
+/* Retro-computing, lightweight CSS */
+:root{
+  --bg:#0b0d10;
+  --panel:#11151a;
+  --muted:#8da0a6;
+  --text:#e6f3f7;
+  --accent:#6ee16e; /* green phosphor vibe */
+  --accent2:#e1c56e; /* amber */
+  --link:#7ee0ff;
+  --border:#1b232b;
+  --danger:#ff6b6b;
+}
+
+*{ box-sizing: border-box; }
+html,body{ margin:0; padding:0; background:var(--bg); color:var(--text); font:14px/1.4 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
+a{ color:var(--link); text-decoration:none; }
+a:hover{ text-decoration:underline; }
+.container{ max-width:900px; margin:0 auto; padding:12px; }
+
+.bar{
+  display:flex; justify-content:space-between; align-items:center;
+  background:var(--panel); border-bottom:1px solid var(--border);
+  padding:8px 12px; position:sticky; top:0; z-index:10;
+}
+.brand{ font-weight:700; color:var(--accent); }
+nav a{ margin:0 8px; }
+
+.search{ display:flex; gap:8px; background:var(--panel); padding:8px; border:1px solid var(--border); border-radius:6px; }
+.search input, select, textarea{
+  background:#0f1419; color:var(--text); border:1px solid var(--border); border-radius:4px; padding:6px;
+}
+.search button, button{
+  background:transparent; color:var(--text); border:1px solid var(--accent); border-radius:4px; padding:6px 10px; cursor:pointer;
+}
+.search button:hover, button:hover{ background:#0f2a16; }
+
+.list{ list-style:none; margin:12px 0; padding:0; }
+.item{ display:flex; gap:10px; background:var(--panel); border:1px solid var(--border); border-radius:6px; padding:8px; margin-bottom:8px; }
+.votes{ display:flex; flex-direction:column; align-items:center; gap:2px; min-width:40px; }
+.votes.inline{ flex-direction:row; gap:6px; min-width:auto; }
+.vote{ background:#0f1419; border:1px solid var(--border); width:28px; height:22px; line-height:18px; text-align:center; }
+.score{ color:var(--accent2); }
+
+.title{ font-weight:700; }
+.meta{ color:var(--muted); font-size:12px; }
+.excerpt{ color:#c8e1e7; }
+
+.post header{ display:flex; gap:12px; align-items:center; }
+.post .body{ background:#0f1419; border:1px solid var(--border); border-radius:6px; padding:10px; }
+
+.comments .comment{ background:var(--panel); border:1px solid var(--border); border-radius:6px; padding:8px; margin:8px 0; }
+
+.comment-form textarea{ width:100%; min-height:100px; }
+
+.footer{ border-top:1px solid var(--border); padding:12px; background:var(--panel); }
+
+.table{ width:100%; border-collapse:collapse; }
+.table th,.table td{ border:1px solid var(--border); padding:6px; }
+.inline{ display:inline; }
+
+@media (max-width:720px){
+  .item{ flex-direction:column; }
+  .votes{ flex-direction:row; }
+}
+
+/* Forms — consistent layout */
+form label {
+  display: block;
+  margin: 10px 0 4px;
+  font-weight: 600;
+}
+
+#post-form {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  align-items: start;
+}
+
+#post-form select,
+#post-form input[type="text"],
+#post-form textarea,
+#post-form button {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+#post-form textarea {
+  min-height: 220px;   /* bigger editor */
+  resize: vertical;
+}
+
+/* Optional: a tidy two-column layout on wider screens */
+@media (min-width: 900px) {
+  #post-form {
+    grid-template-columns: 220px 1fr;
+    grid-auto-flow: row;
+  }
+  #post-form label {
+    grid-column: 1 / 2;
+    align-self: center;
+    margin: 0;
+  }
+  #post-form select,
+  #post-form input[type="text"],
+  #post-form textarea {
+    grid-column: 2 / 3;
+  }
+  #post-form button,
+  #post-form #post-status {
+    grid-column: 2 / 3;
+  }
+}

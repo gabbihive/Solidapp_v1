@@ -1,0 +1,28 @@
+{% extends "layout.njk" %}
+{% block content %}
+<h2>New post</h2>
+<form id="post-form">
+  <label>Section
+    <select name="section_slug" required>
+      {% for s in sections %}
+        <option value="{{ s.slug }}">{{ s.name }}</option>
+      {% endfor %}
+    </select>
+  </label>
+  <label>Kind
+    <select name="kind" required>
+      <option value="request">request</option>
+      <option value="offer">offer</option>
+      <option value="question">question</option>
+    </select>
+  </label>
+  <label>Title
+    <input type="text" name="title" maxlength="160" required>
+  </label>
+  <label>Body (Markdown)
+    <textarea name="body_md" rows="10" required></textarea>
+  </label>
+  <button type="submit">Post</button>
+  <span id="post-status"></span>
+</form>
+{% endblock %}

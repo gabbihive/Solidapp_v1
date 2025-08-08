@@ -1,0 +1,21 @@
+services:
+  app:
+    build: .
+    environment:
+      - ADMIN_PASSWORD=${ADMIN_PASSWORD}
+      - ADMIN_SLUG=${ADMIN_SLUG:-admin-9f2a7c1b}
+      - TOKEN_SECRET=${TOKEN_SECRET}
+      - PORT=${PORT:-8080}
+      - POW_DIFFICULTY=${POW_DIFFICULTY:-18}
+      - TOR_FRIENDLY=${TOR_FRIENDLY:-true}
+      - SITE_NAME=${SITE_NAME:-Solidapp}
+      - SITE_TAGLINE=${SITE_TAGLINE:-Mutual aid, offers, and questions — no login.}
+      - POST_COOLDOWN_SECONDS=${POST_COOLDOWN_SECONDS:-60}
+      - COMMENT_COOLDOWN_SECONDS=${COMMENT_COOLDOWN_SECONDS:-30}
+      - MAX_LINKS_PER_POST=${MAX_LINKS_PER_POST:-3}
+      - MAX_LINKS_PER_COMMENT=${MAX_LINKS_PER_COMMENT:-2}
+    volumes:
+      - ./data:/app/data
+      - ./backups:/app/backups
+    ports:
+      - "8080:8080"

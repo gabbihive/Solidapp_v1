@@ -1,0 +1,37 @@
+{% extends "layout.njk" %}
+{% block content %}
+<article class="post">
+  <header>
+    <div class="votes">
+      <button class="vote" data-type="post" data-id="{{ post.id }}" data-dir="1">▲</button>
+      <div class="score">{{ post.score }}</div>
+      <button class="vote" data-type="post" data-id="{{ post.id }}" data-dir="-1">▼</button>
+    </div>
+    <h1>{{ post.title }}</h1>
+    <div class="meta">in <a href="/s/{{ post.section_slug }}">{{ post.section_name }}</a> • {{ post.kind }}</div>
+  </header>
+  <div class="body">{{ post.body_html | safe }}</div>
+</article>
+
+<section class="comments">
+  <h3>Comments</h3>
+  <form class="comment-form" data-post="{{ post.id }}">
+    <textarea name="body_md" placeholder="Write a comment in Markdown..." required></textarea>
+    <button type="submit">Comment</button>
+  </form>
+  <ul class="comment-list">
+    {% for c in comments %}
+      <li class="comment">
+        <div class="votes inline">
+          <button class="vote" data-type="comment" data-id="{{ c.id }}" data-dir="1">▲</button>
+          <div class="score">{{ c.score }}</div>
+          <button class="vote" data-type="comment" data-id="{{ c.id }}" data-dir="-1">▼</button>
+        </div>
+        <div class="cbody">{{ c.body_html | safe }}</div>
+      </li>
+    {% else %}
+      <li>No comments yet.</li>
+    {% endfor %}
+  </ul>
+</section>
+{% endblock %}
